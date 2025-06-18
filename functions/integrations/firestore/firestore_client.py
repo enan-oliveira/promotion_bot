@@ -1,18 +1,10 @@
-import firebase_admin
-from firebase_admin import credentials, firestore
+from firebase_admin import firestore, App as AppFirebase
 
 class FirestoreClient:
     # TODO: add logs
 
-    def __init__(self, certificate_path: str):
-        self._initialize_firebase(certificate_path)
-        self.db_client = firestore.client()
-
-    def _initialize_firebase(self, certificate_path: str):
-        if not firebase_admin._apps:
-            firebase_admin.initialize_app(
-                credentials.Certificate(certificate_path)
-            )
+    def __init__(self, app: AppFirebase):
+        self.db_client = firestore.client(app=app)
 
     def add(self, collection: str, document: str, data: dict):
         doc_ref = self.db_client.collection(collection).document(document)

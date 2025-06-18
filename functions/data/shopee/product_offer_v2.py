@@ -13,8 +13,8 @@ class ProductOfferNode(BaseModel):
     shopName: str
     productLink: HttpUrl
     offerLink: HttpUrl
-    periodStartTime: datetime
-    periodEndTime: datetime
+    periodStartTime: float
+    periodEndTime: float
     priceMin: str
     priceMax: str
     productCatIds: List[int]

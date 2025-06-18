@@ -4,7 +4,7 @@ query Fetch($page: Int) {
     listType: 2,
     sortType: 2,
     page: $page,
-    limit: 50
+    limit: 10
   ) {
     nodes {
       productName
