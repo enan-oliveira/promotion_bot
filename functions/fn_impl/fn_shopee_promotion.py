@@ -5,7 +5,7 @@ from service.shopee.shopee_service import ShopeeService
 
 app = initialize_app(name='fn_cron_shopee')
 
-@scheduler_fn.on_schedule(schedule='*/30 * * * *')
+@scheduler_fn.on_schedule(schedule='*/15 * * * *')
 def send_shopee_promotion(_: scheduler_fn.ScheduledEvent):
 
     service = ShopeeService(app)

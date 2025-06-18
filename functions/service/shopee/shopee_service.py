@@ -1,6 +1,5 @@
 import logging
 from datetime import datetime, timedelta
-from time import sleep
 
 from data.shopee.product_offer_v2 import ProductOfferV2Object, ProductOfferNode
 from integrations.shopee.shopee_affiliate_api import ShopeeAffiliateApi
@@ -45,13 +44,13 @@ class ShopeeService:
         promotions = product_offers.data.productOfferV2.nodes
         for promo in promotions:
             if not self._promo_already_sent(promo):
-                sleep(1)
                 self._get_api_telegram().send_photo(
                     photo_url=promo.imageUrl.__str__(),
                     caption=self._get_telegram_caption(promo),
                     link=promo.offerLink
                 )
                 self._set_promo_as_sent(promo)
+                break
             else:
                 logging.info(f'Promo: [{promo.itemId}, {promo.productName}] already sent to telegram!')
 
